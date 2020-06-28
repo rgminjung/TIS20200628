@@ -16,10 +16,6 @@
             width: 250px;
         }
     </style>
-
-    <!-- vue 스크립트 플러그인 임포트   -->
-    
-
 </head>
 <body>
     <xmp>
@@ -35,11 +31,19 @@
         Vue 인스턴스 내부에서 직접 이용되지 않고
         Vue 인스턴스와 data 속성에 주어진 객체 사이에 프록시를 두어 처리한다.
 
-      [참조] page 109~111
+      [참조] page 107~111
 
       문제 1. 각자
         v-on 지시자를 사용하여 input 태그에 값이 입력 될때마다
         input 태그의 value 속성값을 console.log로 출력하시오.
+        event.target ==> input 태그를 의미한다. 
+        
+        페이지 107 참고.
+        methods : {
+            clickBtn : function(event){
+              console.log(event);
+            }
+        }
       문제 2. 같이
         watch 속성을 이용하여 data 속성의 변화를 감지하여 console.log로 출력하시오.
 
@@ -51,3 +55,19 @@
 
 </body>
 </html>
+
+<!-- vue 스크립트 플러그인 임포트 -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */ </script>
+<script>
+  /* edtmc^2w */
+  new Vue({
+    el: "#app",
+    data: {},
+    methods: {
+      msgKey : function(event){
+        console.log(event.target.value);
+      },
+    },
+  });
+
+</script>
