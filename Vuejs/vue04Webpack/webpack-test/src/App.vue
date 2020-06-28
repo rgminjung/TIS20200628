@@ -16,10 +16,11 @@
 <script>
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
+
 export default {
   data() {
     return {
-      msg: "Hello, Vuejs"
+      msg: "Hello VueJS"
     };
   },
   components: {
