@@ -11,7 +11,6 @@
 
     <!-- CSS import -->
     <link rel="stylesheet" href="../css/reset.css">
-
 </head>
 
 <body>
@@ -36,15 +35,16 @@
 </html>
 
 
-<!-- vue 스크립트 플러그인 임포트 -->
-<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
-    /* vue 플러그인 임포트 */
-</script>
+<!-- vue 스크립트 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
 <script>
-    new Vue({
-        el: "#app",
+    // Vue() 생성자 함수. Vue 프로토타입(==클래스)
+    var vm = new Vue({
+		// el 프로퍼티에는 CSS 선택자 설정.
+        el: "#app", 
+		// data 프로퍼티에는 변수를 저장. 
         data: {
-            message: "Hello,Vue.js!!!!"
-        }
+            message: "Hello, Vue.js!!!!",
+        }, 
     })
 </script>

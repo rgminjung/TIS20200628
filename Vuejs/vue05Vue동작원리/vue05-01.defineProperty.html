@@ -60,15 +60,17 @@
 </body>
 
 </html>
-<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
-    /* vue 플러그인 임포트 */
-</script>
+
+
+<!-- vue 스크립트 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
 <script>
+    // Vue 를 이용하여 #app1 의 {{msg}} 에 "Hello" 를 출력한다.
     var vm1 = new Vue({
         el: "#app",
         data: {
             msg: "Hello",
-        }
+        },
     });
 
     /*    
@@ -92,11 +94,10 @@
             return div.innerHTML;
         },
         set: function (val) {
-            debugger; // break point 
             div.innerHTML = val;
         },
-    })
-
+    });
+	
     data["msg"] = "123";
     data.msg = "abx";
 

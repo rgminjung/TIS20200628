@@ -28,7 +28,7 @@
         section { margin: 0 5% 20px 5%; }
 
         img, div, section {margin: 40px 20px;}
-    </style>	
+    </style>
 </head>
 <body>
     <pre>
@@ -59,11 +59,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> /* jQuery library */</script>
 <script>
-    /* <div w3-include-header="header.html"></div> */
-    $("div[w3-include-header='header.html']").load( "header.html" );
+    // <div w3-include-header="header.html"> </div>
+    var headerhtml = $('div[w3-include-header]').attr('w3-include-header');
+    $('div[w3-include-header]').load( headerhtml );
 
-    /* <div w3-include-footer="footer.html"></div>*/
-    $("div[w3-include-footer='footer.html']").load( "footer.html" );
-
+    // <div w3-include-footer="footer.html"></div>
+    var footerhtml = $('div[w3-include-footer]').attr('w3-include-footer');
+    $('div[w3-include-footer]').load( footerhtml );
 </script>
-

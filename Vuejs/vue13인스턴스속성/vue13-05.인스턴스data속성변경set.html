@@ -69,10 +69,9 @@
 
 </html>
 
+
 <!-- vue 스크립트 플러그인 임포트 -->
-<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
-    /* vue 플러그인 임포트 */
-</script>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */ </script>
 <script>
     /* edtmc^2w */
     new Vue({
@@ -87,19 +86,20 @@
                 console.log(this.$data.arr); // [100,2,3,4,5]
             },
             change2: function (e) {
-                this.$set(this.$data.arr, 1, 300); // <==> Vue.set(this.$data.arr, 1, 300)
+                this.$set(this.$data.arr, 0, 100); // arr[0] = 100 의 의미
+                this.$set(this.$data.arr, 1, 300); // arr[1] = 300 의 의미 <==> Vue.set(this.$data.arr, 1, 300)
                 console.log(this.$data.arr);
             },
             change3: function (e) {
-                this.arr.splice(0, 2, 500);
+                this.arr.splice(0, 2, 500); // 0번방, 1번방은 지우고 0번방에 500을 넣어라.
                 console.log(this.$data.arr);
             },
             change4: function (e) {
                 // ... : ES6 에서 도입된 spread 연산자. React 에서 다시 학습. 
-                var arr_copy = [...this.arr, 70]; // 500, 3, 4, 5, 70
-                this.$data.arr = arr_copy;
+                var arrCopy = [...this.arr, 70]; // 500, 3, 4, 5, 70
+                this.$data.arr = arrCopy;
                 console.log(this.$data.arr);
             },
         },
-    })
+    });
 </script>
