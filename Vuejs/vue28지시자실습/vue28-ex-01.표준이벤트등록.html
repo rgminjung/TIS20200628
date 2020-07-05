@@ -132,7 +132,8 @@ select 에 change 이벤트 핸들러를 작성하시오.
         data: {
             img_image3: "",
             img_but1: ["../images/but1.gif", "../images/but2.gif",],
-            img_swap: ["../images/img_swap_off.png", "../images/img_swap_on.png",]
+            img_swap: ["../images/img_swap_off.png", "../images/img_swap_on.png",],
+            img_select: "",
         },
         methods: {
             imageclick: function (event) {
@@ -158,8 +159,31 @@ select 에 change 이벤트 핸들러를 작성하시오.
                 else if (event.target.id === "img-swap") {
                     event.target.src = this.$data.img_swap[0];
                 }
-            }
-
+            },
+            spanmouseover: function (event) {
+                // <span style="background-color:yellow;"></span> 이 되게 설정
+                console.log(event.target); // <span></span>
+                // background-color:yellow; 자바스크립로 만들기
+                var obj = {
+                    backgroundColor: "yellow",
+                    fontSize: "20pt",
+                }
+                event.target.style = obj;
+                event.target.style.backgroundColor = "yellow";
+            },
+            spanmousedown: function (event) {
+                event.target.style.backgroundColor = "blue";
+            },
+            spanmouseup: function (event) {
+                event.target.style.backgroundColor = "pink";
+            },
+            spanmouseout: function (event) {
+                event.target.style.backgroundColor = "red";
+            },
+            selectchange: function (event) {
+                console.log(event.target); // <option value="...."/>
+                this.$data.img_select = event.target.value;
+            },
         }
     });
 </script>
