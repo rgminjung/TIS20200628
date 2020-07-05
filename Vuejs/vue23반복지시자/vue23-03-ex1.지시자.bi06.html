@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <!-- CSS import -->
     <link rel="stylesheet" href="../css/reset.css">
 </head>
+
 <body>
     <pre>
 
@@ -40,5 +42,28 @@
     </div>
 
 </body>
+
 </html>
-
+
+
+<!-- vue 스크립트 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el : "#app",
+        data :  {
+	        "contacts": [
+	            { "no":100, "name":"설현", "tel":"010-3456-8200", "address":"서현"},
+	            { "no": 99, "name":"혜리", "tel":"010-3456-8299", "address":"서리"},
+	            { "no": 98, "name":"하니", "tel":"010-3456-8298", "address":"서니"},
+	            { "no": 97, "name":"성소", "tel":"010-3456-8297", "address":"서소"},
+	            { "no": 96, "name":"지아", "tel":"010-3456-8296", "address":"서아"},
+	            { "no": 95, "name":"정연", "tel":"010-3456-8295", "address":"서연"},
+	            { "no": 94, "name":"쯔위", "tel":"010-3456-8294", "address":"서위"},
+	            { "no": 93, "name":"사나", "tel":"010-3456-8293", "address":"서나"},
+	            { "no": 92, "name":"모모", "tel":"010-3456-8292", "address":"서모"},
+	            { "no": 91, "name":"소진", "tel":"010-3456-8291", "address":"서진"},
+	        ]
+	    },
+    });
+</script>

@@ -33,24 +33,24 @@
         [2] v-else 디렉티브 :
         [3] v-else-if 디렉티브 :
         [4] v-show 디렉티브 :
-        The use of the v-show directive is almost identical to that of v-if.
-        The only differences are that v-show does not support the <template> syntax
+            The use of the v-show directive is almost identical to that of v-if.
+            The only differences are that v-show does not support the <template> syntax
             렌더링 안됨
             display:none; <--> display:block; 를 사용.
 
-                [참조] 페이지 103, 104
+        [참조] 페이지 103, 104
 
-                https://kr.vuejs.org/v2/guide/conditional.html
+        https://kr.vuejs.org/v2/guide/conditional.html
 
-                https://riptutorial.com/vue-js/example/11981/v-if---v-else
+        https://riptutorial.com/vue-js/example/11981/v-if---v-else
 
     </xmp>
     <hr>
 
 
     <h2>
-        v-if 연습 1.
-        #app1 인스턴스 data 프로퍼티(속성) awesome 에 어떤값을 설쟁하면 될까?
+        v-if 연습 1. 
+        #app1 인스턴스 data 프로퍼티(속성) awesome 에 어떤값을 설쟁하면 될까? 
     </h2>
     <div id="app1">
         <h3 v-if="awesome">Vue is awesome!</h3>
@@ -58,7 +58,7 @@
     </div>
 
     <h2>
-        v-else 연습 2
+		v-else 연습 2
         #app2 인스턴스 data 프로퍼티(속성) awesome 에 어떤값을 설쟁하면 될까?
     </h2>
     <div id="app2">
@@ -67,9 +67,9 @@
     </div>
 
     <h2>
-        v-if/v-else 연습 3
-        위의 2 예제를 결합하는 예제 입니다.
-    </h2>
+		v-if/v-else 연습 3
+		위의 2 예제를 결합하는 예제 입니다. 
+	</h2>
     <div id="app3">
         <button v-on:click="clickBind">클릭</button>
         <span v-if="awesome">
@@ -97,13 +97,10 @@
         </span>
     </div>
 </body>
-
 </html>
 
 <!-- vue 스크립트 플러그인 임포트   -->
-<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
-    /* vue 플러그인 임포트 */
-</script>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
 <script>
     new Vue({
         el: "#app1",
@@ -124,17 +121,18 @@
             awesome: true,
         },
         methods: {
-            clickBind: function (event) {
-                // awesome 이 true 이면
-                // awesome 이 true 가 아니면
-                this.$data.awesome = !this.$data.awesome;
+            clickBind : function(e) {
+                // 클릭하면 awesome : true ==>  awesome : false
+                // 클릭하면 awesome : false ==>  awesome : true
+                this.$data.awesome = !this.$data.awesome; // 토글 기능 구현.
             },
         },
     });
+
     new Vue({
         el: "#app5",
-        data: {
-            type: 1,
+        data : {
+            type: 1, /* 0, 1, 2, 3 */
         },
         methods: {
             clickBind: function (event) {
@@ -143,7 +141,7 @@
                 if (this.$data.type === 4) {
                     this.$data.type = 0
                 }
-                // 나머지 연산자 방식
+                // 나머지 연산자 방식 : Return a number between 0 and 3:
                 //this.$data.type = this.$data.type % 4;
             }
         }
