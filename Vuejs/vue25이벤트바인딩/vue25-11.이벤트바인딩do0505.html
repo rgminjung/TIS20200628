@@ -29,15 +29,15 @@
     <hr>
     <div id="app2">
         <div>{{num}}</div>
-        <button v-on:click="clickBtn(10)">클릭</button>
-        <== 실습 </div>
+        <button v-on:click="clickBtn(10)">클릭</button>    <== 실습
+    </div>
 
 </body>
 
 </html>
 
 <!-- vue 스크립트 플러그인 임포트   -->
-<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
 <script>
     new Vue({
         el: "#app1",
@@ -49,8 +49,8 @@
                 debugger;
                 this.$data.num = this.$data.num + 1;
                 // == this.$set(this.$data, "num", this.$data.num + 1)
-            }
-        }
+            },
+        },
     });
     new Vue({
         el: "#app2",
@@ -62,8 +62,8 @@
                 debugger;
                 this.$data.num = this.$data.num + val;
                 // == this.$set(this.$data, "num", this.$data.num + val)
-            }
-        }
+            },
+        },
     });
 
 </script>
