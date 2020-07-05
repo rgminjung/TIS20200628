@@ -53,3 +53,27 @@
 
 </body>
 </html>
+
+
+<!-- vue 스크립트 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        /* e dt mc^2 w */
+        el: "#app2",
+        data: {
+            message1 : "Vue 인스턴스의 template 속성을 사용하는 경우",
+        },
+        template : `
+        <div>
+            <h2>{{message1}}</h2>
+            <div style="border-bottom: 1px solid black;">첫번째 엘리먼트</div>
+            <div style="border-bottom: 1px solid black;">두번째 엘리먼트</div>
+        </div>
+        `,
+        methods: { },
+        components: {},
+        computed: {},
+        watch :{},
+    });
+</script>
