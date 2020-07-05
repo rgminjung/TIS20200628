@@ -69,14 +69,14 @@
                     Vue.js의 v-bind 디렉티브(지시자)를 사용하여 csbord 와 whsize class 속성 설정<br>
                 </div>
                 <br>
-                <button v-on:click="btn6_onclick('whsize', true )">whsize class 속성 추가</button>
-                <button v-on:click="btn6_onclick('whsize', false)">whsize class 속성 제거</button>
+                <button v-on:click="btn6_onclick(this.event, 'whsize', true )">whsize class 속성 추가</button>
+                <button v-on:click="btn6_onclick(this.event, 'whsize', false)">whsize class 속성 제거</button>
                 <br>
-                <button v-on:click="btn6_onclick('csbord', true )">csbord class 속성 추가</button>
-                <button v-on:click="btn6_onclick('csbord', false)">csbord class 속성 추가</button>
+                <button v-on:click="btn6_onclick(this.event, 'csbord', true )">csbord class 속성 추가</button>
+                <button v-on:click="btn6_onclick(this.event, 'csbord', false)">csbord class 속성 추가</button>
                 <br>
-                <button v-on:click="btn5_onclick(true )">csbord 와 whsize class 속성 추가</button>
-                <button v-on:click="btn5_onclick(false)">csbord 와 whsize class 속성 제거</button>
+                <button v-on:click="btn5_onclick(this.event, true )">csbord 와 whsize class 속성 추가</button>
+                <button v-on:click="btn5_onclick(this.event, false)">csbord 와 whsize class 속성 제거</button>
             </div>
 </body>
 
@@ -112,8 +112,12 @@
                     this.$data.css1[prop] = val;
                 }
             },
-            btn6_onclick: function (key, val) {
+            btn6_onclick: function (event, key, val) {
                 debugger;
+                // arguments[0]  : event 
+                // arguments[1]  : key 
+                // arguments[2]  : val
+                console.log(arguments)
                 console.log(key, val);
                 this.$data.css1[key] = val;
             },
