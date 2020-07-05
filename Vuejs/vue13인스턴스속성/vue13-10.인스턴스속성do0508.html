@@ -58,3 +58,39 @@
 </body>
 
 </html>
+
+<!-- vue 스크립트 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+    /* e dt mc^2 w */
+    /* data 프로퍼티에 설정된 변수: {{ }} */
+    new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, Vue.js",
+            methodscopy: "",
+            watchcopy: "",
+            /* computedcopy: "",  // computed 속성과 중복해서 사용 불가 */
+        },
+        template: null,
+        methods: {
+            reverseMsg: function (event) {
+                var aa = this.message.split(" ").reverse().join(" ");
+                this.$set(this.$data, 'message', aa);
+                this.$data.methodscopy = aa;
+            },
+        },
+        components: null,
+        computed: {
+            computedcopy: function () {
+                return this.message;
+            },
+        },
+        watch: {
+            message: function (val) {
+                console.log("message의 값이 바뀐다: ", val);
+                this.$data.watchcopy = val;
+            },
+        },
+    });
+</script>
