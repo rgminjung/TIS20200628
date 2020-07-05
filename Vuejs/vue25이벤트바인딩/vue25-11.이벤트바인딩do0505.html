@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <!-- CSS import -->
     <link rel="stylesheet" href="../css/reset.css">
 </head>
+
 <body>
     <xmp>
         v-on 디렉티브와 이벤트 핸들러 설정 예제.
@@ -24,15 +26,44 @@
         <div>{{num}}</div>
         <button v-on:click="clickBtn">클릭</button>
     </div>
-    <div id="app3">
-        <p>{{ message }}</p>
-        <button v-on:click="reverseMsg">문자열 역순</button>
-    </div>
     <hr>
     <div id="app2">
         <div>{{num}}</div>
-        <button v-on:click="clickBtn(10)">클릭</button>    <== 실습
-    </div>
+        <button v-on:click="clickBtn(10)">클릭</button>
+        <== 실습 </div>
 
 </body>
+
 </html>
+
+<!-- vue 스크립트 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#app1",
+        data: {
+            num: 0,
+        },
+        methods: {
+            clickBtn: function (e) {
+                debugger;
+                this.$data.num = this.$data.num + 1;
+                // == this.$set(this.$data, "num", this.$data.num + 1)
+            }
+        }
+    });
+    new Vue({
+        el: "#app2",
+        data: {
+            num: 0,
+        },
+        methods: {
+            clickBtn: function (val) {
+                debugger;
+                this.$data.num = this.$data.num + val;
+                // == this.$set(this.$data, "num", this.$data.num + val)
+            }
+        }
+    });
+
+</script>
