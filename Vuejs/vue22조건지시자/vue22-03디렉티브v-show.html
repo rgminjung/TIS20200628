@@ -15,10 +15,6 @@
             font-size:  20pt;
         }
     </style>
-
-    <!-- vue 스크립트 플러그인 임포트   -->
-    
-
 </head>
 <body>
     <xmp>
@@ -56,17 +52,17 @@
 </html>
 
 <!-- vue 스크립트 플러그인 임포트   -->
-<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */ </script>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
 <script>
-    new Vue({
-        el:"#app1",
+    new Vue( {
+        el: "#app1",
         data : {
-            a: true,
+            a : true,
         },
-        methods: {
+        methods : {
             clickBind : function(e){
-                this.$data.a = !this.$data.a;
-            }
+                this.$data.a = !this.$data.a; // 토글 기능
+            },
         },
-    })
+    });
 </script>
