@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
-
-</head>
-
-<body>
-    <xmp>
+    <body>
+        <xmp
+>
         ES6의 class 키워드를 사용하여 컴포넌트를 만드는 방법을 학습한다.
         컴포넌트 이름을 HelloReact로 만들고 "Hello, React!!!"를 출력하시오.
 
@@ -23,16 +22,59 @@
             import ReactDOM from 'react-dom';
         3단계: 컴포넌트 만들기
         4단계: DOM에 컴포넌트 주입
-    </xmp>
-    <hr>
+    </xmp
+        >
+        <hr />
 
-    <div id="app"></div>
-</body>
-
+        <div id="app"></div>
+    </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"
+>
+    /* import { React} from 'react'; */
+</script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"
+>
+    /* import { ReactDOM } from 'react-dom'; */
+</script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"
+>
+    /* JSX를 자바스크립트로 변환 */
+</script>
 
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
 
-
+    class HelloReact extends React.Component {
+        state = {
+            msg: "Hello, React^^",
+        };
+        constructor(props) {
+            super(props);
+            //this.handler = this.handler.bind(this);
+        }
+        //handler(event) {
+        //alert(event.target);
+        //}
+        render() {
+            return (
+                <div>
+                    Hello, React!!!, s : {this.state.msg}, p : {this.props.name}
+                </div>
+            );
+        }
+    }
+
+    //reactDom에 추가
+    ReactDOM.render(
+        <HelloReact name="HelloReact~~~~~"> </HelloReact>,
+        document.getElementById("app")
+    );
+</script>

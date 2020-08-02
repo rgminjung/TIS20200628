@@ -1,31 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>조건부 렌더링</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>조건부 렌더링</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
-</head>
-
-<body>
-    <xmp>
+    <body>
+        <xmp
+>
         조건부 렌더링
 
         참고: https://reactjs.org/docs/conditional-rendering.html
-    </xmp>
-    <hr>
+    </xmp
+        >
+        <hr />
 
-    <div id="app"></div>
-</body>
-
+        <div id="app"></div>
+    </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"
+>
+    /* import { React} from 'react'; */
+</script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"
+>
+    /* import { ReactDOM } from 'react-dom'; */
+</script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"
+>
+    /* JSX를 자바스크립트로 변환 */
+</script>
 
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
 
+    //컴포넌트 만들기
+    //컴포넌트 종류
+    //1.클래스형 컴포넌트
+    //2.함수형 컴포넌트
+    //3.고차함수형(하이오더, ) 컴포넌트 -> 클래스의 상속 구현하기 위하여 >성능이 좋음
 
-
+    //4.1 함수형 컴포넌트
+    function UserGreeting(props) {
+        return <h1>Welcome back! {props.isLogin + ""}</h1>;
+    }
+
+    function GuestGreeting(props) {
+        return <h1>Please sign up.</h1>;
+    }
+
+    //4.2 클래스형 컴포넌트
+    class Greeting extends React.Component {
+        render() {
+            //isLogin의 값에 따라 리턴하는 컴포넌트 분기한다
+            //isLogin은 부모로 부터 받는 값이다.
+            const isLogin = this.props.isLogin;
+
+            //코드 추가. 부모로부터 받은 props를 자식 컴포넌트에 넘기시오
+            if (isLogin) {
+                //UserGreeting 출력
+                //return (return <h1>Welcome back!</h1>);
+                return <UserGreeting {...this.props}></UserGreeting>;
+            } else {
+                //GuestGreeting 출력
+                return <GuestGreeting {...this.props}></GuestGreeting>;
+            }
+        }
+    }
+
+    //reactDom에 추가
+    //Greeting 컴포넌트로 isLogin에 false를 넘기도록 설정하시오
+    ReactDOM.render(
+        <Greeting isLogin={true}></Greeting>,
+        document.getElementById("app")
+    );
+</script>
