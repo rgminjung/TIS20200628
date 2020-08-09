@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Tick Tock</title>
+
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
+
+    <body>
+        <pre>
+        컴포넌트 생명주기를 실습을 통해 학습한다.
+        
+        1. 1초마다 카운트를 1씩 증가시키는 TickTok컴포넌트를 만드시오.
+        2. couter 10이되면 setInterval을 중지하시오.
+
+        <img src="../images/react_life_cycle.jpg" width="800px" height="600px">
+    </pre>
+        <hr />
+
+        <div id="app"></div>
+    </body>
+</html>
+
+<!-- react 플러그인 include   -->
+<!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
+
+    class TickTock extends React.Component {
+        state = {
+            counter: 0,
+            timer: null /*setInval의 핸들러를 저장하는 property*/,
+        };
+        constructor(props) {
+            super(props);
+            //this 바인드 처리
+            //tick 메서드는 this.를 바인드 해야할까요?(this를 쓸때는 바인드 처리해야함)
+            this.tick = this.tick.bind(this);
+        }
+
+        componentDidMount() {
+            //timer만들기
+            const aaa = window.setInterval(this.tick, 1000); //1초
+            this.setState({
+                timer: aaa,
+            });
+        }
+
+        tick() {
+            //counter값 변경
+            //State값이 바뀌면 componentDidUpdate호출
+            this.setState({
+                counter: this.state.counter + 1,
+            });
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+            console.log("componentDidUpdate");
+            if (this.state.counter >= 10) {
+                //timer중지
+                window.clearInterval(this.state.timer);
+            }
+        }
+
+        render() {
+            return <div>React current counter : {this.state.counter}</div>;
+        }
+    }
+
+    ReactDOM.render(<TickTock></TickTock>, document.getElementById("app"));
+</script>

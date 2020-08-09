@@ -1,52 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Letter Card</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Letter Card</title>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
+        <link rel="stylesheet" href="../css/reset.css" />
 
-    <style>
-        .letter {
-            padding: 10px;
-            margin: 10px;
-            color: #333333;
-            display: inline-block;
-            font-family: monospace;
-            font-size : 32px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <xmp>
+        <style>
+            .letter {
+                padding: 10px;
+                margin: 10px;
+                color: #333333;
+                display: inline-block;
+                font-family: monospace;
+                font-size: 32px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <xmp
+>
         컴포넌트에 CSS를 적용하는 방법을 학습한다.
         컴포넌트에 인라인 스타일링을 사용한다.
-    </xmp>
-    <hr>
+    </xmp
+        >
+        <hr />
 
-    <h2>스타일로 만든 </h2>
-    <div class="App">
-        <div class="letter" style="background-color:#58B3FF;">A</div>
-        <div class="letter" style="background-color:#FF605F;">E</div>
-        <div class="letter" style="background-color:#FFD52E;">I</div>
-        <div class="letter" style="background-color:#49DD8E;">O</div>
-        <div class="letter" style="background-color:#AE99FF;">U</div>
-    </div>
-    <hr>
+        <h2>스타일로 만든</h2>
+        <div class="App">
+            <div class="letter" style="background-color: #58b3ff;">A</div>
+            <div class="letter" style="background-color: #ff605f;">E</div>
+            <div class="letter" style="background-color: #ffd52e;">I</div>
+            <div class="letter" style="background-color: #49dd8e;">O</div>
+            <div class="letter" style="background-color: #ae99ff;">U</div>
+        </div>
+        <hr />
 
-    <h2>컴포넌트로 만든 </h2>
-    <div id="app">
-    </div>
-</body>
+        <h2>컴포넌트로 만든</h2>
+        <div id="app"></div>
+    </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
 
+    class LetterCard extends React.Component {
+        //style
 
+        render() {
+            console.log(this.props.bgcolor);
 
-
+            /*
+            방식1.         
+           
+            var styleLabel = {
+                padding: "10px",
+                margin: "10px",
+                color: "#333333",
+                display: "inline-block",
+                fontFamily: "monospace",
+                fontSize: "32px",
+                textAlign: "center",
+                backgroundColor: this.props.bgcolor,
+            };
+            return <div style={styleLabel}>{this.props.letter}</div>;
+            */
+
+            //방식2. spread 연산자를 사용
+            var styleLabel = {
+                padding: "10px",
+                margin: "10px",
+                color: "#333333",
+                display: "inline-block",
+                fontFamily: "monospace",
+                fontSize: "32px",
+                textAlign: "center",
+                backgroundColor: "#58B3FF",
+            };
+            var bgcolor = {
+                backgroundColor: this.props.bgcolor,
+            };
+            var styleLable2 = {
+                ...styleLabel,
+                ...bgcolor,
+            };
+            return <div style={styleLable2}>{this.props.children}</div>;
+        }
+    }
+
+    ReactDOM.render(
+        //children 은 <span>A</span>을 넘김
+        <div>
+            <LetterCard bgcolor={"#58b3ff"}>
+                <span>A</span>
+            </LetterCard>
+            <LetterCard bgcolor={"#ff605f"}>
+                <span>E</span>
+            </LetterCard>
+            <LetterCard bgcolor={"#ffd52e"}>
+                <span>I</span>
+            </LetterCard>
+            <LetterCard bgcolor={"#49dd8e"}>
+                <span>O</span>
+            </LetterCard>
+            <LetterCard bgcolor={"#ae99ff"}>
+                <span>U</span>
+            </LetterCard>
+        </div>,
+        document.getElementById("app")
+    );
+</script>

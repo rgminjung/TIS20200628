@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>ref는</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>ref는</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
-
-</head>
-
-<body>
-    <xmp>
+    <body>
+        <xmp>
         ref
             reference 의 줄밈
             ref는 DOM 노드에 이름을 부여하는 방법
@@ -65,8 +63,39 @@
                 }
             }
     </xmp>
-
-
-</body>
-
+        <div id="app"></div>
+    </body>
 </html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
+
+    class CustomTextInput extends React.Component {
+        constructor(props) {
+            super(props);
+
+            //ref생성
+            this.refInput = React.createRef();
+        }
+        componentDidMount() {
+            console.log(" componentDidMount");
+            this.refInput.current.focus();
+        }
+        render() {
+            return (
+                <div>
+                    <input type="text" ref={this.refInput} />
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+        <CustomTextInput></CustomTextInput>,
+        document.getElementById("app")
+    );
+</script>

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+        <style>
+            .App {
+                display: inline-block;
+                background-color: gray;
+                border: 10px solid black;
+                height: 63px; /* Math.round(Math.random() * 30) + 50 */
+                width: 228px; /* Math.round(Math.random() * 300) - 50 */
+            }
+        </style>
+    </head>
 
-    <link rel="stylesheet" href="../css/reset.css" />
-    <style>
-        .App {
-            display: inline-block;
-            background-color: gray;
-            border: 10px solid black;
-            height: 63px; /* Math.round(Math.random() * 30) + 50 */
-            width: 228px; /* Math.round(Math.random() * 300) - 50 */
-        }
-    </style>
-</head>
-
-<body>
-    <xmp>
+    <body>
+        <xmp
+>
         컴포넌트 스타일링 기법을 학습한다.
         리액트의 핵심 원칙은 컴포넌트는 독립적이며 재사용 가능해야 한다는 것이다.
         리액트가 html, style, javascript를 한 곳에서 지정하는 것을 권장한다.
@@ -38,22 +38,37 @@
             height: 63px; /* Math.round(Math.random() * 30) + 50 */
             width: 228px; /* Math.round(Math.random() * 300) - 50 */
         }
-    </xmp>
-    <hr>
+    </xmp
+        >
+        <hr />
 
-    <h2>스타일로 만든 </h2>
-    <div class="App">
-    </div>
-    <hr>
+        <h2>스타일로 만든</h2>
+        <div class="App"></div>
+        <hr />
 
-    <h2>컴포넌트로 만든 </h2>
-    <div id="app"></div>
-</body>
-
+        <h2>컴포넌트로 만든</h2>
+        <div id="app"></div>
+    </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
 
-
+    //css를 javascript로 변환하는 경우
+    var styleDiv = {
+        display: "inline-block",
+        backgroundColor: "gray",
+        border: "10px solid black",
+        height: "63px",
+        width: "228px",
+    };
+
+    ReactDOM.render(<div style={style1}></div>, document.getElementById("app"));
+</script>

@@ -1,32 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>컴포넌트 생명주기</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>컴포넌트 생명주기</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
-</head>
-
-<body>
-    <pre>
+    <body>
+        <pre>
         컴포넌트 생명주기
+        작업
+        1.  컴포넌트에 버튼을 추가하고 click이벤트를 설정
+        2.  click이벤트 핸들러 작성시 주의사항 : constructor에서 this를 bind한다.
 
         <img src="../images/react_life_cycle.jpg" width="800px" height="600px">
     </pre>
-    <hr>
+        <hr />
 
-    <div id="app">
-    </div>
-</body>
-
+        <div id="app"></div>
+    </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
 
+    class App extends React.Component {
+        state = {
+            r: 0,
+        };
+        constructor(props) {
+            super(props);
+            console.log();
+            //this.bind
+            this.handler = this.handler.bind(this); //this는 App를 나타냄
+        }
 
+        componentWillMount() {
+            console.log("componentWillMount");
+        }
 
-
+        componentDidMount() {
+            console.log("componentDidMount");
+            //focus주고자 할때 사용
+        }
+
+        componentWillReceiveProps(nextProps) {
+            console.log("componentWillReceiveProps");
+        }
+
+        shouldComponentUpdate(nextProps, nextState) {
+            console.log("shouldComponentUpdate");
+            return true;
+        }
+
+        componentWillUpdate(nextProps, nextState) {
+            console.log("componentWillUpdate");
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+            console.log("componentDidUpdate");
+        }
+
+        componentWillUnmount() {
+            console.log("componentWillUnmount");
+        }
+
+        handler(event) {
+            console.log("handler.call setState");
+            //React에서 this.state의 값을 바꿀때는 this.setState()를 사용
+            //Vue에서 this.$date값을 바꿀때는 Vue.set()을 사용
+            this.setState({
+                r: this.state.r + 1,
+            });
+        }
+
+        render() {
+            return (
+                <div>
+                    <input type="text"></input>
+                    <button onClick={this.handler}>
+                        current state value : {this.state.r}
+                    </button>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<App></App>, document.getElementById("app"));
+</script>

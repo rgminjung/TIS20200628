@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
+
+    <body>
+        <pre>
+
+    <img src="../images/electronclock.png" alt="">
+
+    폰트 사이즈: 80pt;
+
+
+    </pre>
+        <hr />
+
+        <div id="app"></div>
+    </body>
+</html>
+
+<!-- react 플러그인 include   -->
+<!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
+
+    //단계4. React.Component 만들기
+    class ElectronClock extends React.Component {
+        state = {
+            style1: {
+                fontSize: "80pt",
+            },
+            counter: 0,
+            timer: null /*setInval의 핸들러를 저장하는 property*/,
+        };
+
+        z2(val) {
+            //1이 입력되면  -> 01로 바꾸는 함수
+            //11 -> 11로
+
+            const str = "00" + val;
+            return str.substr(str.length - 2, 2);
+        }
+
+        componentDidMount() {
+            //timer만들기
+            const aaa = window.setInterval(this.tick, 1000); //1초
+            this.setState({
+                timer: aaa,
+            });
+        }
+
+        tick() {
+            //counter값 변경
+            //State값이 바뀌면 componentDidUpdate호출
+
+            const d = new Date();
+            const h = d.getHours();
+            const m = d.getMinutes();
+            const s = d.getSeconds();
+
+            this.setState({
+                counter: `${h}:${m}:${s}`,
+            });
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+            console.log("componentDidUpdate");
+            if (this.state.counter >= 10) {
+                //timer중지
+                window.clearInterval(this.state.timer);
+            }
+        }
+
+        render() {
+            //const sDate = new Date().toLocaleTimeString();
+            return (
+                <div style={this.state.style1}>
+                    {this.z2(h)} : {this.z2(m)} : {this.z2(s)}
+                </div>
+            );
+            /*
+            return (
+                <div style={this.state.style1}>
+                    {h + ":" + m + ":" + s + ""}
+                </div>
+            );*/
+        }
+    }
+
+    window.setInterval(function () {
+        ReactDOM.render(
+            <ElectronClock></ElectronClock>,
+            document.getElementById("app")
+        );
+    }, 1000);
+    //단계5. ReactDOM.render() 에 컴포넌트 주입
+    //reactDom에 추가
+    /*
+    ReactDOM.render(
+        <ElectronClock></ElectronClock>,
+        document.getElementById("app")
+    );*/
+</script>

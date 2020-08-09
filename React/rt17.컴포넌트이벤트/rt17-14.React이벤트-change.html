@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/reset.css" />
 
-    <style>
-        .success {
-            background-color: green;
-        }
+        <style>
+            .success {
+                background-color: green;
+            }
 
-        .failure {
-            background-color: red;
-        }
-    </style>
-</head>
+            .failure {
+                background-color: red;
+            }
+        </style>
+    </head>
 
-<body>
-    <xmp>
+    <body>
+        <xmp
+>
 
         change 이벤트 예제를 실습하여 본다.
 
@@ -35,15 +36,65 @@
         .failure {
             background-color: red;
         }
-    </xmp>
+    </xmp
+        >
 
-    <div id="app"></div>
-</body>
+        <div id="app"></div>
+    </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
 
+    class CompInputextends extends React.Component {
+        state = {
+            classname: "failure",
+        };
+        constructor(props) {
+            super(props);
 
+            this.handlerChange = this.handlerChange.bind(this); //this === 컴포넌트
+        }
+        handlerChange(event) {
+            console.log(event.target.name, event.target.value); //bind가 안되면 this는 undefined
 
-
+            //event.target.vale === "0000" 이면 success
+            //event.target.vale === "0000" 아니면 failure
+            var classname = "";
+            if (event.target.value === "0000") {
+                classname = "success";
+            } else {
+                classname = "failure";
+            }
+
+            //this.state에 값을 저장 => setState()를 사용
+            this.setState({
+                classname: classname,
+            });
+        }
+
+        render() {
+            return (
+                <div>
+                    <input
+                        type="password"
+                        name="password"
+                        className={this.state.classname}
+                        onChange={this.handlerChange}
+                    />
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+        <CompInputextends></CompInputextends>,
+        document.getElementById("app")
+    );
+</script>

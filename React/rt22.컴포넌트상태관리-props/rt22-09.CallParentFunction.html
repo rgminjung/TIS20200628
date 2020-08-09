@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/reset.css" />
 
-    <style>
-        #parent {
-            background-color: lightblue;
-            padding: 50px;
-		}
+        <style>
+            #parent {
+                background-color: lightblue;
+                padding: 50px;
+            }
 
-        #child {
-            background-color: lightcoral;
-            margin: 50px;
-            padding: 20px;
-		}
-    </style>
-</head>
+            #child {
+                background-color: lightcoral;
+                margin: 50px;
+                padding: 20px;
+            }
+        </style>
+    </head>
 
-<body>
-    <pre>
+    <body>
+        <pre>
 
     자식 -> 부모 데이터 전달하는 예제를 작성한다.
 
@@ -31,27 +31,101 @@
     자식 컴포넌트에서 부모 컴포넌트의 함수를 호출하는 식으로 데이터를 넘긴다.
 
 
-    </pre>
-    <hr>
+    </pre
+        >
+        <hr />
 
-    <div id="app">
-        <div id="parent">
-            <div id="child">
-                4
-                <br/>
-                I am a child
-                <br/>
-                <button onClick="doParentToggleFromChild">
-                    toggle
-                </button>
+        <div id="app">
+            <div id="parent">
+                <div id="child">
+                    4
+                    <br />
+                    I am a child
+                    <br />
+                    <button onClick="doParentToggleFromChild">
+                        toggle
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
 
-
+    class Child extends React.Component {
+        state = {
+            counter: 0,
+        };
+
+        constructor(props) {
+            super(props);
+            //부모로 부터 받은 값을 state에 저장
+            this.state.counter = this.props.counter;
+            this.doParentToggleFromChild = this.doParentToggleFromChild.bind(
+                this
+            );
+        }
+        doParentToggleFromChild(event) {
+            //this.state.counter = this.state.counter + 1; //리렌더링 : 컴포넌트 새로고침 이 발생하지 않는다
+            //부모의 메소드를 호출
+            this.props.parentToggle(1);
+        }
+        render() {
+            return (
+                <div id="child">
+                    {this.props.counter}}
+                    <br />
+                    I am a child
+                    <br />
+                    <button onClick={this.doParentToggleFromChild}>
+                        toggle
+                    </button>
+                </div>
+            );
+        }
+    }
+
+    class Parent extends React.Component {
+        state = {
+            counter: 0,
+        };
+
+        constructor(props) {
+            super(props);
+            this.doParentToggle = this.doParentToggle.bind(this);
+        }
+
+        doParentToggle(params) {
+            //이벤트 핸들러 Click
+            console.log("child click");
+            //자식으로부터 받은값을 state에 저장
+            const aaa = this.state.counter + Number(params);
+            this.setState({
+                counter: aaa,
+            });
+        }
+
+        render() {
+            //자식으로 넘기기 state.counter, doParentToggleFromChild() 메서드
+            return (
+                <div id="parent">
+                    <Child
+                        counter={this.state.counter}
+                        parentToggle={this.doParentToggle}
+                    ></Child>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<Parent></Parent>, document.getElementById("app"));
+</script>

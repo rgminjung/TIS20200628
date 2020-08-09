@@ -1,85 +1,121 @@
 <!DOCTYPE html>
 <html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title></title>
+        <style>
+            body {
+                background-color: lightgrey;
+            }
+            body > * {
+                text-align: center;
+                vertical-align: middle;
+                line-height: 2em;
+            }
+            p {
+                top: 50%;
+                text-align: center;
+                padding: 10px 0;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
-    <style>
-        body {
-            background-color: lightgrey;
-        }
-        body > * {
-            text-align: center;
-            vertical-align: middle;
-            line-height: 2em;
-        }
-        p {
-            top: 50%;
-            text-align: center;
-            padding: 10px 0;
-        }
+            header {
+                background-color: orange;
+                margin: 10px 0;
+                width: 100%;
+                height: 60px;
+            }
 
-        header {
-            background-color: orange;
-            margin: 10px 0 ;
-            width: 100%;
-            height: 60px;
-        }
+            /* <div id="content-list"> */
+            #content {
+                background-color: white;
+                margin: 0 0 30px 0;
+            }
 
-        /* <div id="content-list"> */
-        #content {
-            background-color: white;
-            margin: 0 0 30px 0 ;
-        }
+            aside {
+                background-color: gray;
+                margin: 20px;
+                width: calc(50% - 40px);
+                height: 200px;
+                float: left;
+            }
+            #content-list {
+                background-color: gray;
+                margin: 20px;
+                width: calc(50% - 40px);
+                float: right;
+                height: 200px;
+            }
+            #content::after {
+                clear: both;
+                display: block;
+                content: "";
+            }
 
-        aside {
-            background-color: gray;
-            margin: 20px ;
-            width: calc(50% - 40px);
-            height: 200px;
-            float: left;
-        }
-        #content-list {
-            background-color: gray;
-            margin: 20px ;
-            width: calc(50% - 40px);
-            float: right;
-            height: 200px;
-        }
-        #content::after {
-            clear: both;
-            display: block;
-            content: '';
-        }
+            footer {
+                margin: 10px 0;
+                background-color: lightblue;
+                width: 100%;
+                height: 50px;
+                clear: both;
+            }
+        </style>
+    </head>
 
-        footer {
-            margin: 10px 0 ;
-            background-color: lightblue;
-            width: 100%;
-            height: 50px;
-            clear: both;
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        Header
-    </header>
-    <div id="content">
-        <p>Content</p>
-        <aside>
-            Aside
-        </aside>
-        <div id="content-list">
-            List
-        </div>
-    </div>
-    <footer>
-        Footer
-    </footer>
-</body>
-
+    <body>
+        <div id="app"></div>
+    </body>
 </html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
+
+    class Header extends React.Component {
+        render() {
+            return <header>Header</header>;
+        }
+    }
+
+    class Aside extends React.Component {
+        render() {
+            return <aside>Aside</aside>;
+        }
+    }
+
+    class Contentlist extends React.Component {
+        render() {
+            return <div id="content-list">List</div>;
+        }
+    }
+
+    class Content extends React.Component {
+        render() {
+            return (
+                <div id="content">
+                    <p>Content</p>
+                    <Aside></Aside>
+                    <Contentlist></Contentlist>
+                </div>
+            );
+        }
+    }
+    class Footer extends React.Component {
+        render() {
+            return <footer>Footer</footer>;
+        }
+    }
+
+    ReactDOM.render(
+        <div>
+            <Header></Header>
+            <Content></Content>
+            <Footer></Footer>
+        </div>,
+        document.getElementById("app")
+    );
+</script>
