@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mobile Project</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Mobile Project</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- Latest compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        />
 
-    <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
+        <!-- CSS import -->
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
+    <body>
+        <div>
+            <a
+                href="#"
+                onClick="window.open('https://vuejstodo-aa185.firebaseapp.com/','Todo앱확인','width=800,height=700,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;"
+                rel="nofollow"
+                >TODO 애플리케이션 구현 확인 링크</a
+            >
+        </div>
 
-</head>
-<body>
-
-    <div>
-        <a href="#" onClick="window.open('https://vuejstodo-aa185.firebaseapp.com/','Todo앱확인','width=800,height=700,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">TODO 애플리케이션 구현 확인 링크</a>
-    </div>
-
-    <xmp>
+        <xmp>
         React CLI 을 사용하여 ToDo 어플리케이션을 만들어 본다.
 
 
         1. 프로젝트 관련 작업
             step 1. 프로젝트 생성
                 $ npm install -g create-react-app
-                $ create-react-app todoreact  # 프로젝트명은 소문자로 만들어야 함.
-                $ cd todoreact
+                $ create-react-app crudreact  # 프로젝트명은 소문자로 만들어야 함.
+                $ cd crudreact
                 $ npm run start
 
 
@@ -68,7 +74,7 @@
             │   └─ assets              # 기타 자원
             │   │   └─ logo.png
             │   ├─ components           # 컴포넌트
-            │   │   └─ todo             # 폴더 생성
+            │   │   └─ crud             # 폴더 생성
             │   │   └─ login            # 폴더 생성
             │   ├─ router               # 라우터
             │   ├─ views                # 라우터 페이지
@@ -159,6 +165,5 @@
 
 
     </xmp>
-
-</body>
+    </body>
 </html>
