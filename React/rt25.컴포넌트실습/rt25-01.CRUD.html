@@ -55,22 +55,111 @@
     console.log(ReactDOM);
 
     class CrudListItem extends React.Component {
+        state = {
+            isEditMode: false,
+        };
+        constructor(props) {
+            super(props);
+
+            //this bind
+            this.doUp = this.doUp.bind(this);
+            this.doDown = this.doDown.bind(this);
+            this.doDel = this.doDel.bind(this);
+            this.doEdit = this.doEdit.bind(this);
+            this.doSave = this.doSave.bind(this);
+
+            //ref만들기
+            this.refUserName = React.createRef();
+            this.refUserPower = React.createRef();
+        }
+        doUp() {
+            const id = this.props.man.id;
+            this.props.doUp(id); //curdapp에 있는 doUp호출
+        }
+        doDown() {
+            const id = this.props.man.id;
+            this.props.doDown(id); //curdapp에 있는 doUp호출
+        }
+        doDel() {
+            const id = this.props.man.id;
+            this.props.doDel(id); //curdapp에 있는 doUp호출
+        }
+        doEdit() {
+            this.setState((prevState, prop) => {
+                return {
+                    isEditMode: !prevState.isEditMode,
+                };
+            });
+        }
+        doSave() {
+            //isEditMode 바꾸기
+            this.setState((prevState, prop) => {
+                return {
+                    isEditMode: !prevState.isEditMode,
+                };
+            });
+
+            //수정값 던지기
+            const id = this.props.man.id;
+            const name = this.refUserName.current.value;
+            const power = Number(this.refUserPower.current.value);
+            const newMan = {
+                id: id,
+                name: name,
+                power: power,
+            };
+
+            this.props.doEdit(newMan); //crudApp의 doEdit호출
+        }
         render() {
             const { id, name, power } = this.props.man;
 
-            return (
+            const formView = (
                 <tr className="" key={id}>
                     <td>{id}</td>
                     <td>{name}</td>
                     <td>{power}</td>
                     <td>
-                        <button>Del</button>
-                        <button>Power Up</button>
-                        <button>Power Down</button>
-                        <button>Edit</button>
+                        <button onClick={this.doDel}>Del</button>
+                        <button onClick={this.doUp}>Power Up</button>
+                        <button onClick={this.doDown}>Power Down</button>
+                        <button onClick={this.doEdit}>Edit</button>
                     </td>
                 </tr>
             );
+
+            const formEdit = (
+                <tr className="" key={id}>
+                    <td>{id}</td>
+                    <td>
+                        <input
+                            type="text"
+                            name="name"
+                            ref={this.refUserName}
+                            defaultValue={name}
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            name="power"
+                            ref={this.refUserPower}
+                            defaultValue={power}
+                        />
+                    </td>
+                    <td>
+                        <button>Del</button>
+                        <button onClick={this.doUp}>Power Up</button>
+                        <button onClick={this.doDown}>Power Down</button>
+                        <button onClick={this.doSave}>Save</button>
+                    </td>
+                </tr>
+            );
+            if (this.state.isEditMode) {
+                return formEdit;
+            } else {
+                return formView;
+            }
         }
     }
 
@@ -85,8 +174,14 @@
                 return <li key={key}>{value}</li>;
                         })}
                         */
-            const trs = rows.map(function (man, index) {
-                return <CrudListItem man={man} key={man.id}></CrudListItem>;
+            const trs = rows.map((man, index) => {
+                return (
+                    <CrudListItem
+                        man={man}
+                        key={man.id}
+                        {...this.props}
+                    ></CrudListItem>
+                );
             });
             return (
                 <table>
@@ -105,28 +200,51 @@
     }
 
     class CrudInput extends React.Component {
+        state = {
+            name: "",
+            power: 0,
+        };
         constructor(props) {
             super(props);
             this.insert = this.insert.bind(this);
+
+            //ref (input, select, textarea는 무조건 생성)
+            this.refUserName = React.createRef();
+            this.refUserPower = React.createRef();
         }
         insert(event) {
             //이벤트 핸들러 this bind
+            //유효성 검사 : 생략
+
             //부모(CrudApp)에게 값을 넘김
             const user = {
-                name: "aaa",
-                power: 10000,
+                name: this.refUserName.current.value,
+                power: Number(this.refUserPower.current.value),
             };
             this.props.insert(user);
         }
         render() {
+            const { name, power } = this.state;
             return (
                 <div>
                     <h1>Creat Read Update Delete</h1>
                     <div>
-                        <label htmlFor="">Name : </label> <input type="text" />
+                        <label htmlFor="">Name : </label>{" "}
+                        <input
+                            type="text"
+                            name="name"
+                            ref={this.refUserName}
+                            defaultValue={name}
+                        />
                     </div>
                     <div>
-                        <label htmlFor="">Power : </label> <input type="text" />
+                        <label htmlFor="">Power : </label>{" "}
+                        <input
+                            type="text"
+                            name="power"
+                            ref={this.refUserPower}
+                            defaultValue={power}
+                        />
                     </div>
                     <button onClick={this.insert}>Add</button>
                     <hr />
@@ -148,12 +266,16 @@
             super(props);
             //this bind
             this.insert = this.insert.bind(this);
+            this.doUp = this.doUp.bind(this);
+            this.doDown = this.doDown.bind(this);
+            this.doDel = this.doDel.bind(this);
+            this.doEdit = this.doEdit.bind(this);
         }
         insert(user) {
             //이벤트 콜백 this bind
             //this.state.list에 추가
 
-            var maxObj = this.$data.list.reduce(function (prev, next) {
+            var maxObj = this.state.list.reduce(function (prev, next) {
                 return prev.id > next.id ? prev : next;
             });
             console.log(maxObj);
@@ -172,12 +294,68 @@
                 list: listCopy,
             });
         }
+        doUp(userid) {
+            var users = this.state.list.map(function (man) {
+                if (man.id == userid) {
+                    man.power = Number(man.power) + 100;
+                }
+                return man;
+            }, userid);
+            //console.log(users); // users == 배열, user== 객체
+            this.setState({
+                list: users,
+            });
+        }
+        doDown(userid) {
+            var users = this.state.list.map(function (man) {
+                if (man.id == userid) {
+                    man.power = Number(man.power) - 50;
+                }
+                return man;
+            }, userid);
+            //console.log(users); // users == 배열, user== 객체
+            this.setState({
+                list: users,
+            });
+        }
+        doDel(userid) {
+            //배열에서 삭제
+            let r = window.confirm("삭제하시겠습니까?");
+            if (r) {
+                let listCopy = this.state.list.filter(function (man, index) {
+                    return man.id !== userid ? true : false;
+                });
+                this.setState({
+                    list: listCopy,
+                });
+            }
+        }
+        doEdit(user) {
+            //this.$data.user = this.$data.list[index];
+            //debugger;
+            let listCopy = this.state.list.map(function (man, index) {
+                if (man.id === user.id) {
+                    return user;
+                } else {
+                    return man;
+                }
+            });
+            this.setState({
+                list: listCopy,
+            });
+        }
 
         render() {
             return (
                 <div>
-                    <CrudInput></CrudInput>
-                    <CrudList {...this.state}></CrudList>
+                    <CrudInput insert={this.insert}></CrudInput>
+                    <CrudList
+                        {...this.state}
+                        doUp={this.doUp}
+                        doDown={this.doDown}
+                        doEdit={this.doEdit}
+                        doDel={this.doDel}
+                    ></CrudList>
                 </div>
             );
         }
